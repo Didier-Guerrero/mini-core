@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Gastos</h1>
+
+    <!-- Formulario para seleccionar rango de fechas -->
+    <form action="/" method="GET">
+        <label for="fechaInicio">Fecha Inicio:</label>
+        <input type="date" id="fechaInicio" name="fechaInicio" required>
+        <label for="fechaFin">Fecha Fin:</label>
+        <input type="date" id="fechaFin" name="fechaFin" required>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <!-- Botón para limpiar filtro -->
+    <div class="btn-container">
+        <a href="/" style="text-decoration: none;">
+            <button type="button">Limpiar Filtro</button>
+        </a>
+    </div>
+
+    <!-- Tabla de gastos -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Descripción</th>
+                <th>Monto</th>
+                <th>Empleado</th>
+                <th>Departamento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (gastos.length > 0) { %>
+                <% gastos.forEach(gasto => { %>
+                    <tr>
+                        <td><%= gasto.id %></td>
+                        <td><%= gasto.fecha %></td>
+                        <td><%= gasto.descripcion %></td>
+                        <td><%= gasto.monto %></td>
+                        <td><%= gasto.empleado.nombre %></td>
+                        <td><%= gasto.departamento.nombre %></td>
+                    </tr>
+                <% }); %>
+            <% } else { %>
+                <tr>
+                    <td colspan="6">No hay gastos registrados.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <!-- Tabla de totales por departamento -->
+    <h2>Totales por Departamento</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Departamento</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (totales.length > 0) { %>
+                <% totales.forEach(total => { %>
+                    <tr>
+                        <td><%= total.departamento %></td>
+                        <td><%= total.total %></td>
+                    </tr>
+                <% }); %>
+            <% } else { %>
+                <tr>
+                    <td colspan="2">No hay totales registrados.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

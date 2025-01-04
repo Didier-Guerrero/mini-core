@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+</head>
+<body>
+    <h1>Resultados de Gastos</h1>
+    <h2>Total Gastos: <%= totalGastos %></h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Empleado</th>
+                <th>Departamento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% gastos.forEach(gasto => { %>
+                <tr>
+                    <td><%= gasto.id %></td>
+                    <td><%= gasto.monto %></td>
+                    <td><%= gasto.fecha %></td>
+                    <td><%= gasto.Empleado ? gasto.Empleado.nombre : 'N/A' %></td>
+                    <td><%= gasto.Departamento ? gasto.Departamento.nombre : 'N/A' %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <a href="/">Volver</a>
+</body>
+</html>
